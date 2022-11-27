@@ -20,13 +20,13 @@ public class ReviewService {
         this.hospitalRepository = hospitalRepository;
     }
 
-    public ReviewResponse ReviewAdd(ReviewRequest reviewRequest){
-        Optional<Hospital> hospital = hospitalRepository.findById(reviewRequest.getHospitalId());
+    public ReviewResponse ReviewAdd(int id,ReviewRequest reviewRequest){
+        Optional<Hospital> hospital = hospitalRepository.findById(id);   // 유저가 리뷰를 작성하고자 하는 게시물 번호를 가져와 해당 데이터를 호출함
         Review review = Review.builder()
-                .title(reviewRequest.getTitle())
+                .title(reviewRequest.getTitle())        // 유저가 작성한 리뷰 데이터의 값(ReviewRequest)을 Review Entity에 저장함
                 .content(reviewRequest.getContent())
                 .userName(reviewRequest.getUserName())
-                .hospital(hospital.get())
+                .hospital(hospital.get())               //
                 .build();
         Review savedReview = reviewRepository.save(review);
         ReviewResponse reviewResponse = ReviewResponse.builder()
