@@ -27,5 +27,6 @@ public class Hospital {
     가급적이면 기본적으로 지연 로딩을 사용하는 것이 좋다.
      */
     @OneToMany(mappedBy = "hospital", fetch = FetchType.LAZY)
+    // 병원은 1개이고 리뷰는 여러개 달리므로 One = 병원, Many = 리뷰들
     private List<Review> reviews;
 }
