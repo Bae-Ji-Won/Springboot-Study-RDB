@@ -7,6 +7,7 @@ import com.jpa.exercise.Domain.Hospital;
 import com.jpa.exercise.Domain.Review;
 import com.jpa.exercise.Repository.HospitalRepository;
 import com.jpa.exercise.Repository.ReviewRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 public class ReviewService {
     private final ReviewRepository reviewRepository;
     private final HospitalRepository hospitalRepository;
@@ -64,14 +66,18 @@ public class ReviewService {
         // 따라서 stream.map을 통해 맵핑을 진행한다.
         List<ReviewReadResponse> reviews = reviewRepository.findByHospital(hospital)
                 .stream().map(review -> ReviewReadResponse.builder()
+                        .id(review.getId())
                         .title(review.getTitle())
                         .content(review.getContent())
-                        .patientName(review.getPatientName())
-                        .hospitalName(hospital.getHospitalName())
+                        .patientName(review.getUserName())
+                        .hospitalName(review.getHospital().getHospitalName())
                         .build()
                 ).collect(Collectors.toList());
-
+        log.info("-------------\n");
+        log.info("리뷰 데이터 값들 : "+reviews.toString());
+        log.info("\n-------------");
         return reviews;
     }
+
 }
 
