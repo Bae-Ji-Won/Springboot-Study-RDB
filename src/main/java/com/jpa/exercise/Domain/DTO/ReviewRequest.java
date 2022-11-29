@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Getter
 @Builder
+// 리뷰를 생성할때 요청받는 데이터
 public class ReviewRequest {
 //    private Integer hospitalId;
     private String title;
