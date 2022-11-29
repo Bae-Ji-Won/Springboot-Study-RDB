@@ -10,5 +10,5 @@ import java.util.List;
 
 @Repository
 public interface ReviewRepository extends JpaRepository<Review,Long> {
-    List<ReviewReadResponse> findByHospital(Hospital hospital);
+    List<Review> findByHospital(Hospital hospital);
 }
