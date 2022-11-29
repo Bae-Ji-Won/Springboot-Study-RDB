@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Getter
+// 리뷰를 생성할때 반환하는 데이터
 public class ReviewResponse {
     private Long id;
     private String title;
