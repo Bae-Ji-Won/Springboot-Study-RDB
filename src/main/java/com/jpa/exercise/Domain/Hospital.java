@@ -28,5 +28,6 @@ public class Hospital {
      */
     @OneToMany(mappedBy = "hospital", fetch = FetchType.LAZY)
     // 병원은 1개이고 리뷰는 여러개 달리므로 One = 병원, Many = 리뷰들
+    // mappedBy를 통해 Review에서 연관맵핑으로 선언한 hospital 객체와 연동한다고 설정을 해준다.
     private List<Review> reviews;
 }
