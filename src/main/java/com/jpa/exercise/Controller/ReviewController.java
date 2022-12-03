@@ -27,14 +27,16 @@ public class ReviewController {
     @GetMapping("/{id}")
     public ResponseEntity<ReviewReadResponse> get(@PathVariable Long id){
         Review review = reviewService.getReview(id);
-        ReviewReadResponse reviewReadResponse = ReviewReadResponse.builder()
-                .id(review.getId())
-                .title(review.getTitle())
-                .content(review.getContent())
-                .patientName(review.getUserName())
-                .hospitalName(review.getHospital().getHospitalName())
-                .build();
+// Builder는 중복으로 사용하므로 중복제거를 위해 DTO에 따로 만들어서 사용함
+//        ReviewReadResponse reviewReadResponse = ReviewReadResponse.builder()
+//                .id(review.getId())
+//                .title(review.getTitle())
+//                .content(review.getContent())
+//                .patientName(review.getUserName())
+//                .hospitalName(review.getHospital().getHospitalName())
+//                .build();
+        ReviewReadResponse response = ReviewReadResponse.fromEntity(review);
 
-        return ResponseEntity.ok().body(reviewReadResponse);
+        return ResponseEntity.ok().body(response);
     }
 }
